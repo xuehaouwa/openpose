@@ -671,6 +671,8 @@ if (UNIX OR APPLE)
       find_package(Caffe)
       include(ExternalProject)
       set(CAFFE_PREFIX caffe)
+      set(CUDA_ARCH_BIN "35 52 60 61 70")
+      set(CUDA_ARCH_PTX "52 61 70")
       set(CAFFE_URL ${CMAKE_SOURCE_DIR}/3rdparty/caffe)
 
       # One for Intel Branch and one for Master
@@ -680,6 +682,9 @@ if (UNIX OR APPLE)
           PREFIX ${CAFFE_PREFIX}
           CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
           -DMKLDNN_INSTALL_DIR:PATH=<INSTALL_DIR>
+          -DCUDA_ARCH_NAME=Manual
+          -DCUDA_ARCH_BIN=${CUDA_ARCH_BIN}
+          -DCUDA_ARCH_PTX=${CUDA_ARCH_PTX}
           -DUSE_CUDNN=${USE_CUDNN}
           -DBUILD_python=ON
           -DCPU_ONLY=${CAFFE_CPU_ONLY}
@@ -697,6 +702,9 @@ if (UNIX OR APPLE)
           SOURCE_DIR ${CAFFE_URL}
           PREFIX ${CAFFE_PREFIX}
           CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+          -DCUDA_ARCH_NAME=Manual
+          -DCUDA_ARCH_BIN=${CUDA_ARCH_BIN}
+          -DCUDA_ARCH_PTX=${CUDA_ARCH_PTX}
           -DUSE_CUDNN=${USE_CUDNN}
           -DCPU_ONLY=${CAFFE_CPU_ONLY}
           -DCMAKE_BUILD_TYPE=Release
